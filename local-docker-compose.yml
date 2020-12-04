@@ -1,0 +1,49 @@
+version: "3.0"
+
+services:
+  php-fpm:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    volumes:
+    - .:/var/www/app
+    container_name: trello-clone-php-fpm
+    image: trello-clone-php-image
+    networks:
+      - "trello-clone"
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+    - 8000:80
+    volumes:
+    - .:/var/www/app
+    networks:
+      - "trello-clone"
+    image: trello-clone-nginx-imge
+    container_name: trello-clone-nginx
+    restart: unless-stopped
+
+  mysql:
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+    container_name: trello-clone-mysql
+    image: trello-clone-mysql-image
+    restart: unless-stopped
+    ports:
+      - 4306:3306
+    volumes:
+      - ${DATA_PATH_HOST}/trello-clone/mysqysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    networks:
+      - trello-clone
+
+networks:
+  trello-clone:
+    external:
+      name: trello-clone

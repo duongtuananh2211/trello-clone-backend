@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS `trello-clone` COLLATE 'utf8_general_ci' ;
+
+FLUSH PRIVILEGES ;
