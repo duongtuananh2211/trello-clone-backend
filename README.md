@@ -31,8 +31,8 @@ docker-compose exec php-fpm composer update
 docker-compose exec php-fpm chmod -R 777 storage/ vendor/
 ```
 
-## Run localhost tại cổng 8080
-http://localhost:8080
+## Run localhost tại cổng 8000
+http://localhost:8000
 
 
 ## run testing
