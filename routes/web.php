@@ -15,9 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-     $result = \Illuminate\Support\Facades\DB::table("MyGuests")->get();
-
-     dd($result);
-
     return view('welcome');
 });
